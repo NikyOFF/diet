@@ -1,0 +1,150 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:bamboo",
+        "minecraft:beetroot",
+        "minecraft:beetroot_seeds",
+        "minecraft:birch_leaves",
+        "minecraft:brown_mushroom",
+        "minecraft:cactus",
+        "minecraft:carrot",
+        "minecraft:crimson_fungus",
+        "minecraft:crimson_roots",
+        "minecraft:dried_kelp",
+        "minecraft:golden_carrot",
+        "minecraft:kelp",
+        "minecraft:lily_pad",
+        "minecraft:melon_seeds",
+        "minecraft:nether_wart",
+        "minecraft:poisonous_potato",
+        "minecraft:potato",
+        "minecraft:pumpkin",
+        "minecraft:pumpkin_seeds",
+        "minecraft:red_mushroom",
+        "minecraft:sea_pickle",
+        "minecraft:seagrass",
+        "minecraft:shroomlight",
+        "minecraft:sunflower",
+        "minecraft:warped_fungus",
+        "minecraft:warped_roots",
+        "minecraft:wheat_seeds",
+        "#minecraft:flowers",
+        "#minecraft:leaves",
+        {
+            "id": "croptopia:artichoke",
+            "required": false
+        },
+        {
+            "id": "croptopia:asparagus",
+            "required": false
+        },
+        {
+            "id": "croptopia:basil",
+            "required": false
+        },
+        {
+            "id": "croptopia:bellpepper",
+            "required": false
+        },
+        {
+            "id": "croptopia:broccoli",
+            "required": false
+        },
+        {
+            "id": "croptopia:cabbage",
+            "required": false
+        },
+        {
+            "id": "croptopia:cauliflower",
+            "required": false
+        },
+        {
+            "id": "croptopia:celery",
+            "required": false
+        },
+        {
+            "id": "croptopia:coffee_beans",
+            "required": false
+        },
+        {
+            "id": "croptopia:corn",
+            "required": false
+        },
+        {
+            "id": "croptopia:cucumber",
+            "required": false
+        },
+        {
+            "id": "croptopia:garlic",
+            "required": false
+        },
+        {
+            "id": "croptopia:greenbean",
+            "required": false
+        },
+        {
+            "id": "croptopia:greenonion",
+            "required": false
+        },
+        {
+            "id": "croptopia:kale",
+            "required": false
+        },
+        {
+            "id": "croptopia:leek",
+            "required": false
+        },
+        {
+            "id": "croptopia:lettuce",
+            "required": false
+        },
+        {
+            "id": "croptopia:onion",
+            "required": false
+        },
+        {
+            "id": "croptopia:radish",
+            "required": false
+        },
+        {
+            "id": "croptopia:rhubarb",
+            "required": false
+        },
+        {
+            "id": "croptopia:rutabaga",
+            "required": false
+        },
+        {
+            "id": "croptopia:spinach",
+            "required": false
+        },
+        {
+            "id": "croptopia:sweetpotato",
+            "required": false
+        },
+        {
+            "id": "croptopia:tea",
+            "required": false
+        },
+        {
+            "id": "croptopia:tomatillo",
+            "required": false
+        },
+        {
+            "id": "croptopia:tomato",
+            "required": false
+        },
+        {
+            "id": "croptopia:turnip",
+            "required": false
+        },
+        {
+            "id": "croptopia:yam",
+            "required": false
+        },
+        {
+            "id": "croptopia:zucchini",
+            "required": false
+        }
+    ]
+}

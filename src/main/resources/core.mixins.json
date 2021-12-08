@@ -1,0 +1,13 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "me.nikyoff.core.mixin",
+    "compatibilityLevel": "JAVA_16",
+    "mixins": [
+        "MixinPlayerEntity"
+    ],
+    "client": [],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

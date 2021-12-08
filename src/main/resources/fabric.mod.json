@@ -1,29 +1,42 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "diet",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
-  "authors": [
-    "Me!"
-  ],
+  "name": "Diet Mod",
+  "description": "nope",
+  "authors": ["nikyoff"],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/nikyoff/diet",
+    "sources": "https://github.com/nikyoff/diet"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "license": "MIT",
+  "icon": "assets/diet/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "me.nikyoff.core.CoreMod",
+      "me.nikyoff.diet.DietMod"
+    ],
+    "client": [
+      "me.nikyoff.diet.client.DietModClient"
+    ],
+    "cardinal-components": [
+      "me.nikyoff.core.component.CoreModComponents",
+      "me.nikyoff.diet.component.DietModComponents"
+    ]
+  },
+  "custom": {
+    "cardinal-components": [
+      "core:player_food_data",
+      "diet:player"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "core.mixins.json",
+    "diet.mixins.json"
   ],
 
   "depends": {

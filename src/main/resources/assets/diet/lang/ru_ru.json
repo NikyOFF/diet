@@ -1,0 +1,16 @@
+{
+  "diet.keybinding.category": "Диета",
+  "diet.key.gui": "Открыть меню",
+
+  "diet.gui.title": "Диета",
+
+  "diet.tooltip.eaten": "При употреблении:",
+
+  "diet.groups.menu.label": "Диета",
+  "diet.groups.fruits.name": "Фрукты",
+  "diet.groups.vegetables.name": "Овощи",
+  "diet.groups.proteins.name": "Протеины",
+  "diet.groups.grains.name": "Мучное",
+  "diet.groups.sugars.name": "Сахар",
+  "diet.groups.blood.name": "Кровь"
+}

@@ -1,0 +1,54 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:cake",
+        "minecraft:cocoa_beans",
+        "minecraft:honey_bottle",
+        "minecraft:honeycomb",
+        "minecraft:sugar",
+        {
+            "id": "croptopia:apple_pie",
+            "required": false
+        },
+        {
+            "id": "croptopia:brownies",
+            "required": false
+        },
+        {
+            "id": "croptopia:cheese_cake",
+            "required": false
+        },
+        {
+            "id": "croptopia:cherry_pie",
+            "required": false
+        },
+        {
+            "id": "croptopia:churros",
+            "required": false
+        },
+        {
+            "id": "croptopia:doughnut",
+            "required": false
+        },
+        {
+            "id": "croptopia:eton_mess",
+            "required": false
+        },
+        {
+            "id": "croptopia:figgy_pudding",
+            "required": false
+        },
+        {
+            "id": "croptopia:molasses",
+            "required": false
+        },
+        {
+            "id": "croptopia:scones",
+            "required": false
+        },
+        {
+            "id": "croptopia:tres_leche_cake",
+            "required": false
+        }
+    ]
+}

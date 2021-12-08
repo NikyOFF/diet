@@ -1,0 +1,19 @@
+{
+  "diet.keybinding.category": "Diet",
+  "diet.key.gui": "Open menu",
+
+  "diet.gui.title": "Diet",
+
+  "diet.tooltip.group": "+%s%% %s",
+  "diet.tooltip.group.special": "+%s",
+  "diet.tooltip.eaten": "When eaten:",
+
+  "diet.groups.menu.label": "Diet",
+  "diet.groups.fruits.name": "Fruits",
+  "diet.groups.vegetables.name": "Vegetables",
+  "diet.groups.proteins.name": "proteins",
+  "diet.groups.grains.name": "grains",
+  "diet.groups.sugars.name": "sugars",
+
+  "diet.groups.blood.name": "blood"
+}

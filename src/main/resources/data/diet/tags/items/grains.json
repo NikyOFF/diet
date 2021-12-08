@@ -1,0 +1,51 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:cake",
+        "minecraft:wheat",
+        {
+            "id": "croptopia:apple_pie",
+            "required": false
+        },
+        {
+            "id": "croptopia:barley",
+            "required": false
+        },
+        {
+            "id": "croptopia:beer",
+            "required": false
+        },
+        {
+            "id": "croptopia:cheese_cake",
+            "required": false
+        },
+        {
+            "id": "croptopia:cherry_pie",
+            "required": false
+        },
+        {
+            "id": "croptopia:doughnut",
+            "required": false
+        },
+        {
+            "id": "croptopia:oat",
+            "required": false
+        },
+        {
+            "id": "croptopia:rice",
+            "required": false
+        },
+        {
+            "id": "croptopia:scones",
+            "required": false
+        },
+        {
+            "id": "croptopia:tres_leche_cake",
+            "required": false
+        },
+        {
+            "id": "croptopia:tuna_sandwich",
+            "required": false
+        }
+    ]
+}

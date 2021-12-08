@@ -1,0 +1,22 @@
+{
+    "replace": false,
+    "values": [
+        "minecraft:water_bucket",
+        {
+            "id": "croptopia:butter",
+            "required": false
+        },
+        {
+            "id": "croptopia:olive_oil",
+            "required": false
+        },
+        {
+            "id": "croptopia:soy_sauce",
+            "required": false
+        },
+        {
+            "id": "croptopia:whipping_cream",
+            "required": false
+        }
+    ]
+}

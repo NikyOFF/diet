@@ -1,0 +1,68 @@
+{
+    "replace": false,
+    "values": [
+        "#minecraft:fishes",
+        "minecraft:beef",
+        "minecraft:bone",
+        "minecraft:chicken",
+        "minecraft:egg",
+        "minecraft:fermented_spider_eye",
+        "minecraft:ink_sac",
+        "minecraft:milk_bucket",
+        "minecraft:mutton",
+        "minecraft:porkchop",
+        "minecraft:rabbit",
+        "minecraft:rotten_flesh",
+        "minecraft:spider_eye",
+        "minecraft:suspicious_stew",
+        "minecraft:turtle_egg",
+        {
+            "id": "croptopia:almond",
+            "required": false
+        },
+        {
+            "id": "croptopia:beef_jerky",
+            "required": false
+        },
+        {
+            "id": "croptopia:blackbean",
+            "required": false
+        },
+        {
+            "id": "croptopia:cashew",
+            "required": false
+        },
+        {
+            "id": "croptopia:cheese_cake",
+            "required": false
+        },
+        {
+            "id": "croptopia:milk_bottle",
+            "required": false
+        },
+        {
+            "id": "croptopia:peanut",
+            "required": false
+        },
+        {
+            "id": "croptopia:pecan",
+            "required": false
+        },
+        {
+            "id": "croptopia:pork_jerky",
+            "required": false
+        },
+        {
+            "id": "croptopia:soybean",
+            "required": false
+        },
+        {
+            "id": "croptopia:tuna_sandwich",
+            "required": false
+        },
+        {
+            "id": "croptopia:walnut",
+            "required": false
+        }
+    ]
+}
