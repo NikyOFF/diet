@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import me.nikyoff.diet.config.EffectConfig;
 import me.nikyoff.diet.config.GroupConfig;
+import me.nikyoff.diet.config.OverriddenFoodConfig;
 import me.nikyoff.diet.effect.common.DietAttribute;
 import me.nikyoff.diet.effect.common.DietCondition;
 import me.nikyoff.diet.effect.common.DietStatusEffect;
@@ -16,6 +17,7 @@ import net.fabricmc.fabric.api.tag.TagFactory;
 import net.minecraft.item.Item;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,9 +27,9 @@ public class DietMod implements ModInitializer {
 
 	public static final Gson GSON = new GsonBuilder()
 			.setPrettyPrinting()
-			.registerTypeAdapter(DietAttribute.class, new DietAttribute.Deserializer())
-			.registerTypeAdapter(DietStatusEffect.class, new DietStatusEffect.Deserializer())
-			.registerTypeAdapter(IDietCondition.class, new IDietCondition.Deserializer())
+			.registerTypeAdapter(DietAttribute.class, new DietAttribute.JsonSerializerDeserializer())
+			.registerTypeAdapter(DietStatusEffect.class, new DietStatusEffect.JsonSerializerDeserializer())
+			.registerTypeAdapter(IDietCondition.class, new IDietCondition.JsonSerializerDeserializer())
 			.create();
 
 	public static final Tag<Item> INGREDIENTS = TagFactory.ITEM.create(DietMod.id("ingredients"));
@@ -42,11 +44,14 @@ public class DietMod implements ModInitializer {
 	public void onInitialize() {
 		LOGGER.info("Initialize...");
 
-		ConditionDeserializerRegistry.register(DietCondition.TYPE, DietCondition.Deserializer.INSTANCE);
+		ConditionDeserializerRegistry.register(DietCondition.TYPE, new Pair(DietCondition.JsonSerializerDeserializer.INSTANCE, DietCondition.JsonSerializerDeserializer.INSTANCE));
 
 		NetworkHandlerC2S.initialize();
-		GroupConfig.initialize();
-		EffectConfig.initialize();
+
+		OverriddenFoodConfig.getInstance().initialize();
+		GroupConfig.getInstance().initialize();
+		EffectConfig.getInstance().initialize();
+
 		ServerEventHandlers.initialize();
 
 		LOGGER.info("Initialized!");

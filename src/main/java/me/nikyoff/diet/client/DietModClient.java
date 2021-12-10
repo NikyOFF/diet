@@ -14,7 +14,7 @@ import org.lwjgl.glfw.GLFW;
 
 @Environment(EnvType.CLIENT)
 public class DietModClient implements ClientModInitializer {
-    private static KeyBinding openDietGuiKeyBind = KeyBindingHelper.registerKeyBinding(
+    private static final KeyBinding openDietGuiKeyBind = KeyBindingHelper.registerKeyBinding(
             new KeyBinding(
                     String.format("%s.key.gui", DietMod.MOD_ID),
                     InputUtil.Type.KEYSYM,

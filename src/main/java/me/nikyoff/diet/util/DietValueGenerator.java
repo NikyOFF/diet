@@ -3,8 +3,8 @@ package me.nikyoff.diet.util;
 import com.google.common.base.Stopwatch;
 import me.nikyoff.diet.DietMod;
 import me.nikyoff.diet.api.IDietGroup;
+import me.nikyoff.diet.config.OverriddenFoodConfig;
 import me.nikyoff.diet.group.DietGroups;
-import me.nikyoff.diet.network.GeneratedValuesSyncS2CPacket;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
@@ -14,10 +14,11 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.registry.Registry;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 public class DietValueGenerator {
-    private static final Map<Item, Set<IDietGroup>> GENERATED = new HashMap<>();
+    public static final Map<Item, Set<IDietGroup>> GENERATED = new HashMap<>();
     private static final Stopwatch STOPWATCH = Stopwatch.createUnstarted();
 
     public static void putAll(Map<Item, Set<IDietGroup>> generated) {
@@ -35,6 +36,8 @@ public class DietValueGenerator {
         RecipeManager recipeManager = minecraftServer.getRecipeManager();
         Set<Item> ungroupedFood = new HashSet<>();
         Set<IDietGroup> groups = DietGroups.get();
+
+//        Map<String, Map<String, Float>> overriddenFood = OverriddenFoodConfig.getInstance().getOverriddenFood();
 
         items:
         for (Item item : minecraftServer.getRegistryManager().get(Registry.ITEM_KEY).stream().toList()) {
@@ -85,8 +88,6 @@ public class DietValueGenerator {
         DietMod.LOGGER.info("Processed {} items", processedItems.size());
         STOPWATCH.stop();
         DietMod.LOGGER.info("Generating diet values took {}", STOPWATCH);
-
-        GeneratedValuesSyncS2CPacket.send(minecraftServer, DietValueGenerator.GENERATED);
     }
 
     private static void traverseRecipes(Set<Recipe<?>> processed, Map<Item, Recipe<?>> recipes, List<Recipe<?>> allRecipes, Recipe<?> recipe) {

@@ -33,29 +33,25 @@ public class DietAttribute {
 
     }
 
-    public static class Serializer implements JsonSerializer<DietAttribute> {
+    public static class JsonSerializerDeserializer implements JsonSerializer<DietAttribute>, JsonDeserializer<DietAttribute> {
 
         @Override
         public JsonElement serialize(DietAttribute src, Type typeOfSrc, JsonSerializationContext context) {
             JsonObject jsonObject = new JsonObject();
 
-            jsonObject.addProperty("attribute", Registry.ATTRIBUTE.getId(src.attribute).toString());
+            jsonObject.addProperty("name", Registry.ATTRIBUTE.getId(src.attribute).toString());
             jsonObject.addProperty("operation", src.operation.toString());
             jsonObject.addProperty("amount", src.amount);
 
             return jsonObject;
         }
 
-    }
-
-    public static class Deserializer implements JsonDeserializer<DietAttribute> {
-
         @Override
         public DietAttribute deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             JsonFormat jsonFormat = DietMod.GSON.fromJson(json, JsonFormat.class);
 
             if (jsonFormat.name == null || jsonFormat.operation == null || jsonFormat.amount == null) {
-                throw new JsonSyntaxException("A required attribute is missing!");
+                throw new JsonSyntaxException("(DietAttribute deserialize) A required attribute is missing!");
             }
 
             Identifier attributeIdentifier = new Identifier(jsonFormat.name);

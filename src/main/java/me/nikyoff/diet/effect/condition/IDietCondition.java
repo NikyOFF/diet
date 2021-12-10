@@ -3,6 +3,7 @@ package me.nikyoff.diet.effect.condition;
 import com.google.gson.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 import java.lang.reflect.Type;
 import java.util.Set;
@@ -16,7 +17,12 @@ public interface IDietCondition {
 
     int getMultiplier(int matches);
 
-    public static class Deserializer implements JsonDeserializer<IDietCondition> {
+    public static class JsonSerializerDeserializer implements JsonSerializer<IDietCondition>, JsonDeserializer<IDietCondition> {
+
+        @Override
+        public JsonElement serialize(IDietCondition src, Type typeOfSrc, JsonSerializationContext context) {
+            return ConditionDeserializerRegistry.get(src.getType()).getLeft().serialize(src, typeOfSrc, context);
+        }
 
         @Override
         public IDietCondition deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
@@ -26,7 +32,7 @@ public interface IDietCondition {
                 throw new JsonParseException("A required attribute is missing!");
             }
 
-            return ConditionDeserializerRegistry.get(new Identifier(jsonObject.get("type").getAsString())).deserialize(json, typeOfT, context);
+            return ConditionDeserializerRegistry.get(new Identifier(jsonObject.get("type").getAsString())).getRight().deserialize(json, typeOfT, context);
         }
 
     }

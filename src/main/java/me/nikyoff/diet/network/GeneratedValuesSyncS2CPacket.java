@@ -31,19 +31,21 @@ public class GeneratedValuesSyncS2CPacket {
     public static Identifier IDENTIFIER = DietMod.id("generated_values_sync");
     private static final Gson gson = new GsonBuilder().create();
 
-    public static void send(MinecraftServer minecraftServer, Map<Item, Set<IDietGroup>> generated) {
+    public static void send(ServerPlayerEntity serverPlayerEntity) {
         PacketByteBuf packetByteBuf = PacketByteBufs.create();
         Map<String, Set<String>> map = Maps.newHashMap();
 
-        for (Map.Entry<Item, Set<IDietGroup>> entry : generated.entrySet()) {
+        for (Map.Entry<Item, Set<IDietGroup>> entry : DietValueGenerator.GENERATED.entrySet()) {
             map.put(Registry.ITEM.getId(entry.getKey()).toString(), entry.getValue().stream().map(IDietGroup::getName).collect(Collectors.toSet()));
         }
 
         packetByteBuf.writeString(GeneratedValuesSyncS2CPacket.gson.toJson(map));
 
-        for (ServerPlayerEntity serverPlayerEntity : minecraftServer.getPlayerManager().getPlayerList()) {
-            ServerPlayNetworking.send(serverPlayerEntity, GeneratedValuesSyncS2CPacket.IDENTIFIER, packetByteBuf);
-        }
+        ServerPlayNetworking.send(serverPlayerEntity, GeneratedValuesSyncS2CPacket.IDENTIFIER, packetByteBuf);
+    }
+
+    public static void sync(MinecraftServer minecraftServer) {
+        minecraftServer.getPlayerManager().getPlayerList().forEach(GeneratedValuesSyncS2CPacket::send);
     }
 
     public static void handleClient(MinecraftClient minecraftClient, ClientPlayNetworkHandler clientPlayNetworkHandler, PacketByteBuf packetByteBuf, PacketSender packetSender) {

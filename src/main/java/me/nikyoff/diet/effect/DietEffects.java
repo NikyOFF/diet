@@ -27,7 +27,7 @@ public class DietEffects {
                     effectConfigData.getAttributes(),
                     effectConfigData.getStatusEffects(),
                     effectConfigData.getDietConditions(),
-                    DietEffect.MatchMethod.findOrDefault(effectConfigData.getMatchMethod(), DietEffect.MatchMethod.ALL)
+                    effectConfigData.getMatchMethod()
             );
 
             DietEffects.effects.add(dietEffect);

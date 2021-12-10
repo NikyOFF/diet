@@ -181,14 +181,19 @@ public class DietCondition implements IDietCondition {
 
     }
 
-    public static class Serializer implements JsonSerializer<DietCondition> {
+    public static class JsonSerializerDeserializer implements JsonSerializer<DietCondition>, JsonDeserializer<DietCondition> {
+        public static final JsonSerializerDeserializer INSTANCE = new JsonSerializerDeserializer();
 
         @Override
         public JsonElement serialize(DietCondition src, Type typeOfSrc, JsonSerializationContext context) {
             JsonObject jsonObject = new JsonObject();
 
+            JsonArray jsonArray = new JsonArray();
+
+            src.groups.forEach(jsonArray::add);
+
             jsonObject.addProperty("type", DietCondition.TYPE.toString());
-            jsonObject.addProperty("groups", DietMod.GSON.toJson(src.groups));
+            jsonObject.add("groups", jsonArray);
             jsonObject.addProperty("match", src.matchMethod.toString());
             jsonObject.addProperty("above", src.above);
             jsonObject.addProperty("below", src.below);
@@ -196,17 +201,12 @@ public class DietCondition implements IDietCondition {
             return jsonObject;
         }
 
-    }
-
-    public static class Deserializer implements  JsonDeserializer<DietCondition> {
-        public static final Deserializer INSTANCE = new Deserializer();
-
         @Override
         public DietCondition deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             JsonFormat jsonFormat = DietMod.GSON.fromJson(json, JsonFormat.class);
 
             if (jsonFormat.type == null || jsonFormat.groups == null || jsonFormat.match == null || jsonFormat.above == null || jsonFormat.below == null) {
-                throw new JsonSyntaxException("A required attribute is missing!");
+                throw new JsonSyntaxException("(DietCondition deserialize) A required attribute is missing!");
             }
 
             return new DietCondition(jsonFormat.groups, MatchMethod.findOrDefault(jsonFormat.match, MatchMethod.EVERY), jsonFormat.above, jsonFormat.below);

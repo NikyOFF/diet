@@ -1,87 +1,80 @@
 package me.nikyoff.diet.config;
 
 import com.google.common.collect.Sets;
-import com.google.common.io.Files;
+import com.google.common.reflect.TypeToken;
 import me.nikyoff.diet.DietMod;
 import me.nikyoff.diet.config.data.EffectConfigData;
+import me.nikyoff.diet.effect.DietEffect;
 import me.nikyoff.diet.effect.DietEffects;
-import org.jetbrains.annotations.Nullable;
+import me.nikyoff.diet.effect.common.DietAttribute;
+import me.nikyoff.diet.effect.common.DietCondition;
+import me.nikyoff.diet.effect.common.DietStatusEffect;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.StatusEffects;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.Writer;
-import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Set;
 
-public class EffectConfig {
-    public static final String NAME = "effects";
-    @Nullable public static EffectConfig INSTANCE = null;
+public class EffectConfig extends Config {
 
-    private static final File file = new File(String.format("config/%s/%s.json", DietMod.MOD_ID, EffectConfig.NAME));
+    private static EffectConfig instance = new EffectConfig();
+    private static final EffectConfig defaultInstance = new EffectConfig(Set.of(
+            new EffectConfigData(
+                    List.of(new DietAttribute(EntityAttributes.GENERIC_MAX_HEALTH, EntityAttributeModifier.Operation.ADDITION, 2)),
+                    List.of(new DietStatusEffect(StatusEffects.REGENERATION, 0)),
+                    List.of(new DietCondition(Set.of("fruits", "vegetables", "proteins"), DietCondition.MatchMethod.ALL, 0.45f, 0.65f)),
+                    DietEffect.MatchMethod.ALL
+            )
+    ));
 
     private final Set<EffectConfigData> effects = Sets.newHashSet();
 
     public EffectConfig() {
+        super("effects");
     }
 
-    public static void writeConfig(EffectConfig config) {
-        DietMod.LOGGER.info(String.format("Writing %s config", GroupConfig.NAME));
+    public EffectConfig(Set<EffectConfigData> effects) {
+        this();
 
-        try (Writer writer = Files.newWriter(EffectConfig.file, StandardCharsets.UTF_8)) {
-            DietMod.GSON.toJson(config, writer);
+        this.effects.clear();
+        this.effects.addAll(effects);
+    }
 
-            DietMod.LOGGER.info(String.format("Config %s recorded", EffectConfig.NAME));
-        } catch (Exception exception) {
-            DietMod.LOGGER.error(String.format("Error when write %s config: %s", EffectConfig.NAME, exception.getMessage()));
+    public static EffectConfig getInstance() {
+        return instance;
+    }
+
+    public Set<EffectConfigData> getEffects() {
+        return effects;
+    }
+
+    @Override
+    public EffectConfig getDefault() {
+        return EffectConfig.defaultInstance;
+    }
+
+    @Override
+    public void setInstance(Config config, boolean localConfig) {
+        super.setInstance(config, localConfig);
+
+        if (config instanceof EffectConfig) {
+            EffectConfig.instance = (EffectConfig) config;
+
+            DietEffects.build(EffectConfig.instance.effects.stream().toList());
         }
     }
 
-    public static void readConfig() {
-        DietMod.LOGGER.info("Reading Seasons Config");
+    @Override
+    public String toJson(boolean isDefault) {
+        String json = DietMod.GSON.toJson(isDefault ? this.getDefault().effects : this.effects);
 
-        try(BufferedReader reader = Files.newReader(EffectConfig.file, StandardCharsets.UTF_8)) {
-            EffectConfig.INSTANCE = DietMod.GSON.fromJson(reader, EffectConfig.class);
-
-            DietEffects.build(EffectConfig.INSTANCE.effects.stream().toList());
-
-            DietMod.LOGGER.info(String.format("Config %s readed", EffectConfig.NAME));
-        } catch (Exception exception) {
-            DietMod.LOGGER.error(String.format("Error when read %s config: %s", EffectConfig.NAME, exception.getMessage()));
-        }
+        return json;
     }
 
-    public static void initializeDefault() {
-        DietMod.LOGGER.info(String.format("Initialize default %s config", EffectConfig.NAME));
-
-        try {
-            EffectConfig.file.createNewFile();
-        } catch (Exception exception) {
-            DietMod.LOGGER.error(String.format("Error when initialize default %s config: %s", EffectConfig.NAME, exception.getMessage()));
-            return;
-        }
-
-        EffectConfig.writeConfig(new EffectConfig());
-
-        DietMod.LOGGER.info(String.format("Default %s config initialized", EffectConfig.NAME));
-    }
-
-    public static void initialize() {
-        DietMod.LOGGER.info(String.format("Initialize %s config", EffectConfig.NAME));
-
-        try {
-            if (!EffectConfig.file.getParentFile().exists()) {
-                EffectConfig.file.getParentFile().mkdirs();
-            }
-
-            if (!EffectConfig.file.exists()) {
-                EffectConfig.initializeDefault();
-            }
-
-            EffectConfig.readConfig();
-
-            DietMod.LOGGER.info(String.format("Config %s initialized!", EffectConfig.NAME));
-        } catch (Exception exception) {
-            DietMod.LOGGER.error(String.format("Config %s initialized error", EffectConfig.NAME), exception);
-        }
+    @Override
+    public EffectConfig fromJson(String json) {
+        Set<EffectConfigData> effects = DietMod.GSON.fromJson(json, new TypeToken<Set<EffectConfigData>>(){}.getType());
+        return new EffectConfig(effects);
     }
 }

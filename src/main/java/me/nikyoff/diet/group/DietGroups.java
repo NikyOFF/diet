@@ -26,9 +26,12 @@ public class DietGroups {
 
     @SuppressWarnings("all")
     public static void build(final List<GroupConfigData> configs) {
-        groups.clear();
+        DietGroups.groups.clear();
+
+        DietMod.LOGGER.info("clear groups");
 
         if (configs.isEmpty()) {
+            DietMod.LOGGER.info("configs is empty");
             return;
         }
 

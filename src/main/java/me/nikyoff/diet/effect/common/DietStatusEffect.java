@@ -36,8 +36,7 @@ public class DietStatusEffect {
 
     }
 
-
-    public static class Serializer implements JsonSerializer<DietStatusEffect> {
+    public static class JsonSerializerDeserializer implements JsonSerializer<DietStatusEffect>, JsonDeserializer<DietStatusEffect> {
 
         @Override
         public JsonElement serialize(DietStatusEffect src, Type typeOfSrc, JsonSerializationContext context) {
@@ -49,16 +48,12 @@ public class DietStatusEffect {
             return jsonObject;
         }
 
-    }
-
-    public static class Deserializer implements JsonDeserializer<DietStatusEffect> {
-
         @Override
         public DietStatusEffect deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             JsonFormat jsonFormat = DietMod.GSON.fromJson(json, JsonFormat.class);
 
             if (jsonFormat.name == null || jsonFormat.power == null) {
-                throw new JsonSyntaxException("A required attribute is missing!");
+                throw new JsonSyntaxException("(DietStatusEffect deserialize) A required attribute is missing!");
             }
 
             Identifier statusEffectIdentifier = new Identifier(jsonFormat.name);

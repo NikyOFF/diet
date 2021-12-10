@@ -25,15 +25,15 @@ public class DietEffect {
     @SerializedName("diet_conditions")
     private final List<IDietCondition> dietConditions;
 
-    @SerializedName("match_method")
-    private final MatchMethod matchMethod;
+    @SerializedName("match")
+    private final MatchMethod match;
 
-    public DietEffect(UUID uuid, List<DietAttribute> attributes, List<DietStatusEffect> statusEffects, List<IDietCondition> dietConditions, MatchMethod matchMethod) {
+    public DietEffect(UUID uuid, List<DietAttribute> attributes, List<DietStatusEffect> statusEffects, List<IDietCondition> dietConditions, MatchMethod match) {
         this.uuid = uuid;
         this.attributes = attributes;
         this.statusEffects = statusEffects;
         this.dietConditions = dietConditions;
-        this.matchMethod = matchMethod;
+        this.match = match;
     }
 
     public UUID getUuid() {
@@ -53,7 +53,7 @@ public class DietEffect {
     }
 
     public int getMatches(PlayerEntity playerEntity) {
-        return this.matchMethod.getMatches(playerEntity, this.dietConditions);
+        return this.match.getMatches(playerEntity, this.dietConditions);
     }
 
     public enum MatchMethod {

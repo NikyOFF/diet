@@ -1,6 +1,7 @@
 package me.nikyoff.diet.config.data;
 
 import com.google.gson.annotations.SerializedName;
+import me.nikyoff.diet.effect.DietEffect;
 import me.nikyoff.diet.effect.common.DietAttribute;
 import me.nikyoff.diet.effect.common.DietStatusEffect;
 import me.nikyoff.diet.effect.condition.IDietCondition;
@@ -18,10 +19,10 @@ public class EffectConfigData {
     @SerializedName("diet_conditions")
     private List<IDietCondition> dietConditions = new ArrayList<>();
 
-    @SerializedName("match_method")
-    private String matchMethod;
+    @SerializedName("match")
+    private DietEffect.MatchMethod matchMethod;
 
-    public EffectConfigData(List<DietAttribute> attributes, List<DietStatusEffect> statusEffects, List<IDietCondition> dietConditions, String matchMethod) {
+    public EffectConfigData(List<DietAttribute> attributes, List<DietStatusEffect> statusEffects, List<IDietCondition> dietConditions, DietEffect.MatchMethod matchMethod) {
         this.attributes = attributes;
         this.statusEffects = statusEffects;
         this.dietConditions = dietConditions;
@@ -40,7 +41,7 @@ public class EffectConfigData {
         return dietConditions;
     }
 
-    public String getMatchMethod() {
+    public DietEffect.MatchMethod getMatchMethod() {
         return matchMethod;
     }
 }
